@@ -1,0 +1,21 @@
+title: Usbinst.exe run with suspicious INF file as an argument
+status: experimental
+description: Any executable can be run with the Citrix signed binary usbinst.exe. Executable has to be specified in INF file passed as a part of an argument
+references:
+  - 'https://github.com/api0cradle/LOLBAS/blob/master/OtherBinaries/Usbinst.md'
+  - 'https://twitter.com/pabraeken/status/993514357807108096'
+  - 'https://github.com/LOLBAS-Project/LOLBAS/blob/master/Archive-Old-Version/LOLUtilz/OtherBinaries/Usbinst.yml'
+tags:
+  - 'attack.t1060'
+author: 'Lukasz Jalowiecki'
+date: 2023/01/10
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection: 
+    CommandLine|contains: 'ica_client\drivers64\ctx'
+  condition: selection
+falsepositives:
+  - Legitimate use of usbinst.exe with INF file outside of known default locations
+level: high
