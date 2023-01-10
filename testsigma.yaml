@@ -13,9 +13,11 @@ logsource:
   product: windows
   category: process_creation
 detection:
-  selection: 
-    CommandLine|contains: 'ica_client\drivers64\ctx'
-  condition: selection
+  selection:
+    Image|endswith: usbinst.exe
+  filter:
+    CommandLine|contains: 'client\drivers64\ctx'
+  condition: selection and not filter
 falsepositives:
   - Legitimate use of usbinst.exe with INF file outside of known default locations
 level: high
